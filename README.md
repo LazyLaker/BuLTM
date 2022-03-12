@@ -5,5 +5,9 @@ For rstantools, you may install it by
 ```
 install.packages("rstantools")
 ```
-2. 
+2. Install by the source package. 
+```
+install.packages('BuLTM_0.0.0.9000.tar.gz', repos = NULL, type = 'source')
+
+```
 
