@@ -6,7 +6,7 @@ A new version of BuLTM pacakge. The name of parameters and hyperparameters are t
 
 Simply use the following code to install. 
 ```
-install.packages('BuLTM', repos = NULL, type="source")
+install.packages('BuLTM', repos = NULL, type=’source‘)
 ```
 
 
