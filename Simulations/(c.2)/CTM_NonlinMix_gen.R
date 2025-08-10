@@ -1,0 +1,57 @@
+rm(list = ls())
+set.seed(543216789)
+library(survival)
+library(xtable)
+library(ggplot2)
+library(MASS)
+library(distr)
+distr  <- UnivarMixingDistribution(Norm(-.5, .5), Norm(1.5, 1), mixCoeff = c(.5, .5))
+
+lambda <- .5
+
+g_inv_bc = function(s, lambda = 2) {
+  if(lambda == 0) {
+    # Inverse log-transformation
+    exp(s)
+  } else {
+    # Inverse (signed) Box-Cox-transformation
+    sign(lambda*s + 1)*abs(lambda*s+1)^(1/lambda)
+  }
+}
+
+
+
+
+M <- 100
+n <- 200
+
+p <- 2
+
+
+dat <- list()
+
+for(m in 1:M){
+  
+  x1 <- runif(n, -2, 2)
+  
+  x2 <- runif(n, -2, 2)
+  
+  e <- r(distr)(n)
+  
+  Z <- -x1 + pi * sin(pi*x1) + x2/2 + 15*dnorm(2*(x2-0.2)) - dnorm(x2 + 0.4) + e
+  
+  y <- sapply(Z, g_inv_bc)
+  
+  delta <- rep(1, n) #Index
+  X <- cbind(x1, x2)
+  TMdataT <- cbind(y,X, delta)
+  colnames(TMdataT) <- c('Y', 'x1', 'x2', 'delta')
+  TMdataT <- as.data.frame(TMdataT)
+  write.csv(TMdataT, file = paste0('BoxNonlinMix/train_', as.character(m), '.csv'), 
+            row.names = F)
+  dat[[m]] <- TMdataT
+}
+
+save(dat, file = 'BoxNonlinMix.RData')
+
+
