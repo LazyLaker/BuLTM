@@ -9,7 +9,14 @@ Simply use the following code to install.
 install.packages('BuLTM', repos = NULL, type=’source‘)
 ```
 
-## Simulation code
+## Simulations
 
 The simulations in each setting consist of three codes: train data generation, test data generation, and the simulation code. We present the code to reproduce the results of BuLTM in the manuscript here. 
 
+## Applications
+
+The code and data to reproduce the results in the Section of Applications. 
+
+## Sensitivity
+
+The code and data to reproduce the sensitiviy analysis results. 
